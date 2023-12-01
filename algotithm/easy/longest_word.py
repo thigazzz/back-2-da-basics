@@ -30,3 +30,5 @@ def LongestWord(sen):
 
 # keep this function call here 
 print(LongestWord(input()))
+
+# COMPLETO
