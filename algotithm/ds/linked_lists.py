@@ -35,11 +35,11 @@ node_A.next = node_B
 node_B.next = node_C
 node_C.next = None
 
-print(node_A.next) # Node B
-print(node_B.next) # Node B
-print(node_C.next) # Não tem proximo
+# print(node_A.next) # Node B
+# print(node_B.next) # Node B
+# print(node_C.next) # Não tem proximo
 
-print(node_A.next.next.data) # C
+# print(node_A.next.next.data) # C
 
 class LinkedList:
     def __init__(self) -> None:
@@ -55,19 +55,41 @@ class LinkedList:
             last_node = last_node.next # Setando o Node Atual como ultimo
         last_node.next = node # Setando o proximo Node
 
+    def remove_last(self):
+        if not self.head:
+            return None
+        
+        head = self.head
+        last_p = self.head
+        
+        # [1] -> [2] -> [3] -> [4] -> [5]
+        while head != None:
+            if head.next.next == None:
+                head.next = None
+            head = head.next
+
     def mid(self):
         if not self.head:
             return None
 
-        slow_ptr = self.head
-        fast_ptr = self.head
+        accr = self.head
+        after = self.head
         
         # [1] -> [2] -> [3] -> [4] -> [5]
-        while fast_ptr and fast_ptr.next:
-            slow_ptr = slow_ptr.next
-            fast_ptr = fast_ptr.next.next
+        while after.next:
+            accr = accr.next
+            after = after.next.next
             
-        return slow_ptr.data
+        return accr.data
+    
+
+    def count(self):
+        c = 0
+        head = self.head
+        while head != None:
+            c += 1
+            head = head.next
+        return c
 
     def print_list(self):
         current_node = self.head
@@ -81,9 +103,11 @@ linked_list.add("2")
 linked_list.add("3")
 linked_list.add("4")
 linked_list.add("5")
-linked_list.add("6")
-linked_list.add("7")
 
-print(linked_list.mid())
-assert linked_list.mid() == "4"
+assert linked_list.count() == 5
+
+assert linked_list.mid() == "3"
+
+linked_list.remove_last()
+assert linked_list.count() == 4
         
