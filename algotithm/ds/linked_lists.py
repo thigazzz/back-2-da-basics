@@ -27,6 +27,9 @@ class Node:
         self.data = data
         self.next = None
 
+    def __repr__(self) -> str:
+        return f"[val: {self.data}, next: {self.next}]" 
+
 node_A = Node("A")
 node_B = Node("B")
 node_C = Node("C")
@@ -41,7 +44,7 @@ node_C.next = None
 
 # print(node_A.next.next.data) # C
 
-class LinkedList:
+class SingleLinkedList:
     def __init__(self) -> None:
         self.head = None
 
@@ -60,13 +63,24 @@ class LinkedList:
             return None
         
         head = self.head
-        last_p = self.head
         
         # [1] -> [2] -> [3] -> [4] -> [5]
         while head != None:
             if head.next.next == None:
                 head.next = None
             head = head.next
+            
+    def remove_item(self, item):
+        accr = self.head
+
+        while accr.next != None:
+            # [1] -> [2] -> [3] -> [4]
+
+            if accr.next.data == item:
+                accr.next = accr.next.next
+                break
+
+            accr = accr.next
 
     def mid(self):
         if not self.head:
@@ -97,12 +111,13 @@ class LinkedList:
             print(current_node.data)
             current_node = current_node.next
 
-linked_list = LinkedList()
+linked_list = SingleLinkedList()
 linked_list.add("1")
 linked_list.add("2")
 linked_list.add("3")
 linked_list.add("4")
 linked_list.add("5")
+
 
 assert linked_list.count() == 5
 
@@ -110,4 +125,6 @@ assert linked_list.mid() == "3"
 
 linked_list.remove_last()
 assert linked_list.count() == 4
-        
+
+linked_list.remove_item('1')
+linked_list.print_list()
