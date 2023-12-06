@@ -20,6 +20,12 @@ Existem tipos de Linked Lists:
 Exemplos da vida-real:
 - Navegação Web: Com as Linked Lists é possivel avançar e voltar páginas Web sem perder seus endereços.
 Além dessa possibilidade, há economia na memoria pois os items são estão sendo processados a cada novo clique
+
+
+Nova explicação:
+Linked List é um conjunto de Nós, onde cada nó aponta para outro,
+mas não quer dizer que ela é uma lista de fato,
+o primeiro elemente sempre vai ser o mesmo e que aponta para outro
 """
 
 class Node:
@@ -128,3 +134,72 @@ assert linked_list.count() == 4
 
 linked_list.remove_item('1')
 linked_list.print_list()
+
+
+# EXERCICIOS
+"""
+
+Simular um reprodutor de musicas usando Linked List, nesse caso Single
+
+class MusicPlayer
+prop musics
+
+met play
+met next
+
+"""
+class Music:
+    def __init__(self, title, pointer=None) -> None:
+        self.title = title
+        self.next = pointer
+
+    def __repr__(self) -> str:
+        return f'[title: {self.title}, next: {self.next}]'
+
+class Musics:
+    def __init__(self) -> None:
+        self.head = None
+
+    def add(self, data):
+        music = Music(data)
+
+
+        # [1] -> None
+        if self.head == None:
+            self.head = music
+            return
+
+        # [1] -> None
+        accr = self.head
+        while accr.next != None:
+            accr = accr.next
+
+        accr.next = music
+
+musics = Musics()
+musics.add("God's Child")
+musics.add("All My Dufffles Goyard!")
+musics.add("Chelsea,NY!")
+musics.add("Backseat")
+
+class MusicPlayer:
+    def __init__(self, musics) -> None:
+        self.musics = musics
+        self.current: Music | None = None
+
+    def play(self):
+        if self.current == None:
+            self.current = self.musics
+
+        print(f"Musica: {self.current.title} pocano")
+    def next(self):
+        self.current = self.current.next
+        print("Passando para proxima musica")
+        self.play()
+
+player = MusicPlayer(musics.head)
+
+player.play()
+player.next()
+player.next()
+
