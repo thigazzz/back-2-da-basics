@@ -77,16 +77,28 @@ class SingleLinkedList:
             head = head.next
             
     def remove_item(self, item):
+        dummy = Node(None)
+        dummy.next = self.head
+
         accr = self.head
+        prev = dummy
 
-        while accr.next != None:
-            # [1] -> [2] -> [3] -> [4]
+        while accr != None:
+            # [None] -> [2] -> [3] -> [1] -> [4] dummy
+            # [1] -> [2] -> [3] -> [4] head
 
-            if accr.next.data == item:
-                accr.next = accr.next.next
-                break
+            if accr.data == item:
+                # [None] -> [2] -> [3] -> [1] -> [4] dummy
+                prev.next = accr.next
+                # [2] -> [3] -> [1] -> [4] dummy
+                accr = prev.next
+            else:
+                # [None] -> [1] -> [2] -> [3] -> [1] -> [4]
+                prev = accr
+                accr = accr.next
 
-            accr = accr.next
+        print(dummy)
+        self.head = dummy.next
 
     def mid(self):
         if not self.head:
@@ -134,6 +146,19 @@ assert linked_list.count() == 4
 
 linked_list.remove_item('1')
 linked_list.print_list()
+
+linked_list_2 = SingleLinkedList()
+linked_list_2.add("1")
+linked_list_2.add("2")
+linked_list_2.add("3")
+linked_list_2.add("1")
+linked_list_2.add("4")
+linked_list_2.add("5")
+
+
+print("-" * 20)
+linked_list_2.remove_item('1')
+linked_list_2.print_list()
 
 
 # EXERCICIOS
@@ -202,4 +227,48 @@ player = MusicPlayer(musics.head)
 player.play()
 player.next()
 player.next()
+
+
+# DOUBLY LINKED LIST
+class DoublyNode:
+    def __init__(self, data, nxt=None, prev=None) -> None:
+        self.next = nxt
+        self.prev = prev
+        self.data = data
+
+    def __repr__(self) -> str:
+        return f'Data: {self.data}'
+
+class DoublyLinkedList:
+    def __init__(self) -> None:
+        self.head = None
+    
+    def add(self, data):
+        node = DoublyNode(data)
+        if self.head is None:
+            self.head = node
+            return
+        
+        accr = self.head
+        while accr.next != None:
+            accr = accr.next
+
+        accr.next = node
+        node.prev = accr
+
+    def __repr__(self) -> str:
+        nodes = []
+        curr = self.head
+        while curr:
+            nodes.append(str(curr))
+            curr = curr.next
+        return ' <-> '.join(nodes) if nodes else 'Empty Doubly Linked List'
+
+
+db_ll = DoublyLinkedList()
+db_ll.add("1")
+db_ll.add("2")
+db_ll.add("3")
+print(db_ll)
+
 
