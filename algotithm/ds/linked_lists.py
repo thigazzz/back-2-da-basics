@@ -256,6 +256,31 @@ class DoublyLinkedList:
         accr.next = node
         node.prev = accr
 
+    def delete(self, item):
+        dummy = DoublyNode(None)
+        dummy.next = self.head
+        dummy.prev = None
+
+        accr = self.head
+        prev = dummy
+
+        while accr is not None:
+            # None <-> [1] <-> [2] <-> [3]
+            # [1] <-> [2] <-> [3]
+
+
+            if accr.data == item:
+                prev.next = accr.next
+                if prev.next != None:
+                    prev.next.prev = prev
+
+
+            prev = prev.next
+            accr = accr.next
+
+        self.head = dummy.next
+        
+
     def __repr__(self) -> str:
         nodes = []
         curr = self.head
@@ -270,5 +295,6 @@ db_ll.add("1")
 db_ll.add("2")
 db_ll.add("3")
 print(db_ll)
-
+db_ll.delete("1")
+print(db_ll)
 
