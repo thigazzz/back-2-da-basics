@@ -14,3 +14,16 @@ com um ou mais nós
 # Tipos de Árvores
 - Binary Trees: São arvores formada por dois filhos cada Nó (left e right)
 """
+from typing import Optional
+class BinaryNode:
+    def __init__(self, data: str, left: Optional['BinaryNode'] = None, right: Optional['BinaryNode'] = None) -> None:
+        self.data = data
+        self.left = left
+        self.right = right
+
+    def __repr__(self) -> str:
+        return f"{self.left} <- {self.data} -> {self.right}"
+
+root = BinaryNode("ROOT")
+root.left = BinaryNode("1 Left")
+root.right = BinaryNode("1 Right")
