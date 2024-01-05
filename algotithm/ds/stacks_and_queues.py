@@ -45,10 +45,55 @@ class Stack:
         self.top = -1
 
     def push(self, element):
-        self.stack.append(element)
+        """
 
-    def pop():
+        metodo para adicionar um elemento
+        no topo da stack, ou pilha.
+        
+        stack:
+        [0]
+
+        stack.push(4)
+        [4] (sempre no topo)
+        [0]
+
+        """
+        self.stack.append(element)
+        self.top += 1
+
+    def pop(self):
+        """
+        Método para remover o elemento
+        no topo da stack, ou pilha
+
+        stack:
+        [2]
+        [7]
+
+        stack.pop()
+        [7]
+
+        """
         self.stack.pop()
+        self.top -= 1
+
+    def is_empty(self):
+        """
+        Retorna se a lista está ou não 
+        vazia
+
+        Se o top for -1, quer dizer que a stack
+        está vazia
+
+        """
+        return self.top == -1
+
+    def peek(self):
+        """
+        Pega o elemento do topo da Stack, ou pilha
+
+        """
+        return self.stack[self.top] 
 
     def get_top(self):
         return self.stack[self.top]
@@ -57,6 +102,25 @@ class Stack:
 
 stack = Stack()
 
+assert stack.is_empty() == True, "Era para ser True"
+
 stack.push("hello")
 
 assert stack.get_top() == "hello"
+assert stack.top == 0
+
+stack.push("...")
+stack.push("...")
+stack.push("Ultimo valor")
+
+assert stack.peek() == "Ultimo valor", "Era para ser Ultimo valor"
+assert stack.top == 3
+
+stack.pop()
+
+
+assert stack.top == 2
+
+assert stack.is_empty() == False, "Era para ser False"
+
+print("TESTE CORRETOS")
