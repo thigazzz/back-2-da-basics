@@ -47,9 +47,24 @@ def transversal(arr):
 def add(arr, item):
     arr.append(item)
 
+def delete(arr, value):
+    for i in range(len(arr)):
+        if arr[i] == value:
+            del arr[i]
+            break
+def update(arr, index, value):
+    try:
+        arr[index] = value
+    except:
+        return "Index fora do range"
 
 assert index(new_array, 2) == 3
 assert index(new_array, 5) == "No index"
 transversal(new_array)
 add(new_array, 6)
 assert index(new_array, 5) == 6
+delete(new_array, 1)
+assert new_array[0] == 2, new_array[0]
+update(new_array,0, 9)
+assert new_array[0] == 9
+assert update(new_array,10, 4) == "Index fora do range"
